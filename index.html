@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeMarket - Premium E-Commerce Experience</title>
+    <link rel="stylesheet" href="styles/base.css">
+</head>
+
+<body>
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div>📧 support@luxemarket.com | 📞 1-800-LUXE-SHOP</div>
+            <div>✨ Free Shipping on Orders Over $50 🚚</div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo" onclick="scrollToSection('home')">LuxeMarket</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#deals">Deals</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search products..." id="searchInput">
+                        <button onclick="performSearch()">🔍</button>
+                    </div>
+                    <div class="cart-icon" onclick="toggleCart()">
+                        🛒
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Promo Banner -->
+    <div class="promo-banner">
+        🔥 FLASH SALE: Up to 70% OFF - Limited Time Only! 🔥
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div>
+                    <h1>Discover Premium Products</h1>
+                    <p>Experience luxury shopping with our curated collection of world-class products. Unbeatable
+                        prices, exceptional quality.</p>
+                    <div class="cta-buttons">
+                        <button class="btn btn-primary" onclick="scrollToSection('products')">Shop Now</button>
+                        <button class="btn btn-secondary" onclick="scrollToSection('categories')">Browse
+                            Categories</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="hero-visual">🛍️</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="category-grid">
+                <div class="category-card" onclick="filterCategory('electronics')">
+                    <div class="category-icon">💻</div>
+                    <h3>Electronics</h3>
+                    <p>Latest tech gadgets & devices</p>
+                </div>
+                <div class="category-card" onclick="filterCategory('fashion')">
+                    <div class="category-icon">👗</div>
+                    <h3>Fashion</h3>
+                    <p>Trending styles & apparel</p>
+                </div>
+                <div class="category-card" onclick="filterCategory('home')">
+                    <div class="category-icon">🏠</div>
+                    <h3>Home & Living</h3>
+                    <p>Comfort meets style</p>
+                </div>
+                <div class="category-card" onclick="filterCategory('sports')">
+                    <div class="category-icon">⚽</div>
+                    <h3>Sports & Fitness</h3>
+                    <p>Active lifestyle essentials</p>
+                </div>
+                <div class="category-card" onclick="filterCategory('beauty')">
+                    <div class="category-icon">💄</div>
+                    <h3>Beauty</h3>
+                    <p>Premium cosmetics</p>
+                </div>
+                <div class="category-card" onclick="filterCategory('toys')">
+                    <div class="category-icon">🎮</div>
+                    <h3>Gaming & Toys</h3>
+                    <p>Fun for all ages</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filterProducts('all')">All Products</button>
+                <button class="filter-tab" onclick="filterProducts('bestseller')">Best Sellers</button>
+                <button class="filter-tab" onclick="filterProducts('new')">New Arrivals</button>
+                <button class="filter-tab" onclick="filterProducts('sale')">On Sale</button>
+                <button class="filter-tab" onclick="filterProducts('featured')">Featured</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products" id="products">
+        <div class="container">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="product-grid" id="productGrid"></div>
+        </div>
+    </section>
+
+    <!-- Deals Section -->
+    <section class="deals-section" id="deals">
+        <div class="container">
+            <div class="deal-timer">
+                <h2>⚡ Flash Sale Ending Soon! ⚡</h2>
+                <p>Don't miss out on these incredible deals</p>
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <span class="number" id="hours">12</span>
+                        <span class="label">Hours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="number" id="minutes">34</span>
+                        <span class="label">Minutes</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="number" id="seconds">56</span>
+                        <span class="label">Seconds</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Free Shipping</h3>
+                    <p>On orders over $50 worldwide</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Secure Payment</h3>
+                    <p>100% protected transactions</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">↩️</div>
+                    <h3>Easy Returns</h3>
+                    <p>30-day money-back guarantee</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💬</div>
+                    <h3>24/7 Support</h3>
+                    <p>Always here to help you</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">👨</div>
+                        <div>
+                            <h4>John Smith</h4>
+                            <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p>"Amazing quality and fast shipping! The products exceeded my expectations. Will definitely shop
+                        here again!"</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">👩</div>
+                        <div>
+                            <h4>Sarah Johnson</h4>
+                            <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p>"Best online shopping experience ever! Customer service is outstanding and the prices are
+                        unbeatable."</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">👨</div>
+                        <div>
+                            <h4>Michael Brown</h4>
+                            <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p>"I love the variety and quality of products. The website is easy to use and checkout is super
+                        smooth!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get exclusive deals, new arrivals, and special offers delivered to your inbox</p>
+            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                <input type="email" placeholder="Enter your email address" required id="emailInput">
+                <button type="submit">Subscribe Now</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>About LuxeMarket</h3>
+                    <p>Your premier destination for premium products. Quality, style, and affordability combined in one
+                        seamless shopping experience.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">📘</a>
+                        <a href="#" title="Twitter">🐦</a>
+                        <a href="#" title="Instagram">📸</a>
+                        <a href="#" title="LinkedIn">💼</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#blog">Blog & News</a></li>
+                        <li><a href="#press">Press Room</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#shipping">Shipping Information</a></li>
+                        <li><a href="#returns">Returns & Exchanges</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#track">Track Your Order</a></li>
+                        <li><a href="#size">Size Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>📧 support@luxemarket.com</li>
+                        <li>📞 1-800-LUXE-SHOP</li>
+                        <li>📍 123 Commerce Street</li>
+                        <li>New York, NY 10001</li>
+                        <li>🕐 Mon-Fri: 9AM-6PM EST</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LuxeMarket. All rights reserved. | <a href="#privacy">Privacy Policy</a> | <a
+                        href="#terms">Terms of Service</a> | <a href="#cookies">Cookie Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script/base.js"></script>
+</body>
+
+</html>`;
+
+
